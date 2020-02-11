@@ -10,7 +10,8 @@ $ python main.py
 ### Precondition
 - required python version : 3.xx
 - sign up Google Cloud Platform
-- create service account 
+- create service account
+- create service account json 
 - add roles to service account
     - roles/bigquery.dataEditor
     - roles/bigquery.jobUser
