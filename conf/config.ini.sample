@@ -7,3 +7,5 @@ target_table_list_file_path = ./conf/target_table_list.json
 # データ取り込みを何日さかのぼって行うか
 ## 気象庁は7日前まで保持している
 sakanobori_day_max = 7
+
+log_level = INFO
