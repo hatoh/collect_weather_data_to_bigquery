@@ -96,6 +96,8 @@ if __name__ == '__main__':
     target_table_list_file_path = settings.get('target_table_list_file_path')
     sakanobori_day_max = int(settings.get('sakanobori_day_max'))
 
+    log_level = settings.get('log_level')
+
     # load table setting
     target_table_dict_list = _load_target_table_list()
 
@@ -105,7 +107,7 @@ if __name__ == '__main__':
     logger = getLogger(__name__)
     basicConfig(
         filename=logfile_path,
-        level=INFO,
+        level=log_level,
         # stream=sys.stdout,
         format='%(asctime)s %(name)s [%(levelname)s] %(message)s'
     )
