@@ -18,7 +18,7 @@ $ python main.py
 
 ### set up this tool
 ```
-$ pip install -r requirementes.txt
+$ pip install -r requirements.txt
 $ mv conf/config.ini{.sample,}
 $ vi conf/config.ini
 $ mv conf/target_table_list.json{.sample,}
