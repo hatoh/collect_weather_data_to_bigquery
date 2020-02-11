@@ -1,5 +1,5 @@
-# Collect_weather_data and load to Google BigQuery
- [気象庁](https://www.data.jma.go.jp/)のデータをダウンロードし、Google BigQueryにロードする
+# collect weather data and load to Google BigQuery
+ [気象庁](https://www.data.jma.go.jp/obd/stats/data/mdrr/docs/csv_dl_readme.html)の気象データをダウンロードし、Google BigQueryにロードする
 
 ### usage
 ```
