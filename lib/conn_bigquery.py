@@ -1,9 +1,13 @@
 import json
 import os
 import datetime
+from logging import getLogger
+import sys
 import traceback
 from google.cloud import bigquery
 from google.cloud.exceptions import NotFound
+
+logger = getLogger(__name__)
 
 
 class ConnBigQuery():
@@ -64,16 +68,21 @@ class ConnBigQuery():
 
             job.result()  # Waits for table load to complete.
 
-            print("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
+            logger.info("Loaded {} rows into {}:{}.".format(job.output_rows, dataset_id, table_id))
 
         except:
-            print(traceback.format_exc())
+            logger.error(traceback.format_exc())
             # ロードできなかったjsonファイルをリネーム
-            os.rename(target_file_path, target_file_path + '_ng'+ dt_now.strftime('_%Y-%m-%d_%H:%M:%S'))
+            ng_file_name = target_file_path + '_ng'+ dt_now.strftime('_%Y-%m-%d_%H:%M:%S')
+            os.rename(target_file_path, ng_file_name)
+            logger.error('can\'t loaded json file: ' + ng_file_name)
+            sys.exit(1)
 
         else:
             # ロードできたらjsonファイルをリネーム
-            os.rename(target_file_path, target_file_path + '_loaded' + dt_now.strftime('_%Y-%m-%d_%H:%M:%S'))
+            loaded_file_name = target_file_path + '_loaded' + dt_now.strftime('_%Y-%m-%d_%H:%M:%S')
+            os.rename(target_file_path, loaded_file_name)
+            logger.info('loaded json file: ' + loaded_file_name)
 
     def query_table(self, query_string):
         """
@@ -91,7 +100,8 @@ class ConnBigQuery():
             return query_results_dict_list
 
         except:
-            print(traceback.format_exc())
+            logger.error(traceback.format_exc())
+            sys.exit(1)
 
     def exists_table(self, table_id):
         """

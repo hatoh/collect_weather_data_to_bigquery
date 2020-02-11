@@ -1,16 +1,15 @@
 import configparser
 import datetime
 import json
+from logging import getLogger, basicConfig, INFO, DEBUG
+import sys
 import traceback
 import lib.conn_bigquery
 from lib.download_uri import download_uri
 
-
-# todo: logger入れる
 # todo: データセットがなければまず作る
-# todo: errorになったらexit(1)しないと。。
 # todo: schemaファイルを書く（他の天気情報の）
-# todo: readmeを書く
+
 
 def _search_max_collected_date(project_id, dataset_id, table_id):
     """
@@ -53,7 +52,8 @@ def _calulate_sakanobori_day(max_collected_date):
     """
     # fixme: JST以外が未考慮
     will_collect_max_day = datetime.date.today() - datetime.timedelta(days=1)
-    print(str(will_collect_max_day) + 'までロード対象日')
+    logger.debug(str(will_collect_max_day) + 'までロード対象日')
+
     target_days = will_collect_max_day - max_collected_date  # datetime.timedelta
     sakanobori_day = target_days.days  # to int
 
@@ -61,21 +61,21 @@ def _calulate_sakanobori_day(max_collected_date):
         sakanobori_day = sakanobori_day_max
 
     # fixme: 未来までロードされている場合のメッセージが不適当
-    print(str(sakanobori_day) + '日まで遡る')
+    logger.debug(str(sakanobori_day) + '日まで遡る')
     return sakanobori_day
 
 
 def _etl(source_url, intermediate_csv_file_path, dataset_id, table_id, schema_file_path):
     # csvダウンロード開始
-    print('start download csv')
+    logger.info('start downloading csv. uri is : ' + source_url)
 
     download_uri(
         uri=source_url,
         dest_file_path=intermediate_csv_file_path
     )
 
-    # bigqueryロード開始
-    print('start load to bigquery')
+    # BigQueryロード開始
+    logger.info('start loading to ' + project_id + '.' + dataset_id + '.' + table_id)
 
     bq = lib.conn_bigquery.ConnBigQuery(
         auth_key_path=service_account_json
@@ -102,12 +102,23 @@ if __name__ == '__main__':
     # load table setting
     target_table_dict_list = _load_target_table_list()
 
+    # logger setting
+    dt_now = datetime.datetime.now()
+    logfile_path = './log/' + dt_now.strftime('%Y-%m-%d') + '.log'
+    logger = getLogger(__name__)
+    basicConfig(
+        filename=logfile_path,
+        level=INFO,
+        # stream=sys.stdout,
+        format='%(asctime)s %(name)s [%(levelname)s] %(message)s'
+    )
+
     try:
         # 処理対象テーブル分ループ
         for target_table in target_table_dict_list:
             # fixme: 中間ファイル出力ディレクトリパスをconfigに外だし
             intermediate_csv_file_path = './data/' + target_table["table_id"] + '.csv'
-            print('target_table: ' + target_table['table_id'])
+            logger.info('etl target table_name is ' + target_table['table_id'])
 
             # テーブル存在確認
             query_bigquery = lib.conn_bigquery.ConnBigQuery(
@@ -123,7 +134,7 @@ if __name__ == '__main__':
                     dataset_id=target_table['dataset_id'],
                     table_id=target_table['table_id']
                 )
-                print(str(max_collected_date) + 'までロード済み')
+                logger.debug(str(max_collected_date) + 'までロード済み')
 
                 # 何日前まで遡ってロードするかの日付を抽出
                 sakanobori_day = _calulate_sakanobori_day(max_collected_date)
@@ -131,7 +142,7 @@ if __name__ == '__main__':
             else:
                 # maxまで遡ってロードする。
                 sakanobori_day = sakanobori_day_max
-                print('テーブル新規作成')
+                logger.debug('テーブルが存在しないので' + str(sakanobori_day_max) + 'まで遡って取得する')
 
             for day_count in reversed(range(sakanobori_day)):
                 # 未来の日付までロードされていても何もしない
@@ -139,6 +150,7 @@ if __name__ == '__main__':
                 target_day = day_count + 1
 
                 target_uri = target_table['source_uri'].replace("00_rct", "0"+str(target_day))
+                logger.info(str(target_day) + '日前のロード開始')
                 _etl(
                     source_url=target_uri,
                     intermediate_csv_file_path=intermediate_csv_file_path,
@@ -147,6 +159,10 @@ if __name__ == '__main__':
                     schema_file_path=target_table['schema_file_path']
                 )
 
-                print(str(target_day)+'日前までロード完了')
+                logger.info(str(target_day) + '日前までロード完了')
     except:
-        print(traceback.format_exc())
+        logger.error(traceback.format_exc())
+        sys.exit(1)
+
+    else:
+        logger.info('etl finished')

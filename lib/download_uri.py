@@ -1,5 +1,9 @@
+from logging import getLogger
+import sys
 import traceback
 import requests
+
+logger = getLogger(__name__)
 
 
 def _fetch_uri(uri):
@@ -11,7 +15,7 @@ def _fetch_uri(uri):
         return response_csv
 
     except:
-        print(traceback.format_exc())
+        logger.error(traceback.format_exc())
 
 
 def _save_to_local_disk(target_stirngs, dest_file_path):
@@ -19,7 +23,7 @@ def _save_to_local_disk(target_stirngs, dest_file_path):
         with open(dest_file_path, mode='a') as text_file:
             text_file.write(target_stirngs)
     except:
-        print(traceback.format_exc())
+        logger.error(traceback.format_exc())
 
 
 def download_uri(uri, dest_file_path):

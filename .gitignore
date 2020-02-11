@@ -7,3 +7,5 @@ data/*
 !data/.gitkeep
 conf/*
 !conf/*sample
+log/
+!log/.gitkeep
