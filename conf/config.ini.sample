@@ -1,0 +1,9 @@
+[settings]
+service_account_json = ./conf/your_service_account.json
+project_id = your_project_id
+dataset_id = your_dataset_id
+target_table_list_file_path = ./conf/target_table_list.json
+
+# データ取り込みを何日さかのぼって行うか
+## 気象庁は7日前まで保持している
+sakanobori_day_max = 7

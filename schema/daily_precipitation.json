@@ -1,0 +1,122 @@
+[
+  {
+    "name":"observatory_number",
+    "type":"integer",
+    "description": "観測所番号"
+  },
+  {
+    "name":"prefectures",
+    "type":"string",
+    "description": "都道府県"
+  },
+  {
+    "name":"point",
+    "type":"string",
+    "description": "地点"
+  },
+  {
+    "name": "international_index_number",
+    "type": "integer",
+    "description": "国際地点番号"
+  },
+  {
+    "name": "observation_year",
+    "type": "integer",
+    "description": "現在時刻/観測時刻(年)"
+  },
+  {
+    "name": "observation_month",
+    "type": "integer",
+    "description": "現在時刻/観測時刻(月)"
+  },
+  {
+    "name": "observation_day",
+    "type": "integer",
+    "description": "現在時刻/観測時刻(日)"
+  },
+  {
+    "name": "observation_hour",
+    "type": "integer",
+    "description": "現在時刻/観測時刻(時)"
+  },
+  {
+    "name": "observation_minute",
+    "type": "integer",
+    "description": "現在時刻/観測時刻(分)"
+  },
+  {
+    "name": "value",
+    "type": "float",
+    "description": "当日の値(mm)"
+  },
+  {
+    "name": "quality_info",
+    "type": "integer",
+    "description": "当日の値の品質情報"
+  },
+  {
+    "name": "extreme_value_update",
+    "type": "integer",
+    "description": "極値更新"
+  },
+  {
+    "name": "extreme_value_update_last_10_years",
+    "type": "integer",
+    "description": "10年未満での極値更新"
+  },
+  {
+    "name": "max_value_until_now",
+    "type": "float",
+    "description": "前日までの観測史上1位の値(mm)"
+  },
+  {
+    "name": "max_value_quality_info",
+    "type": "integer",
+    "description": "前日までの観測史上1位の値の品質情報"
+  },
+  {
+    "name": "max_value_year",
+    "type": "integer",
+    "description": "前日までの観測史上1位の値の年"
+  },
+  {
+    "name": "max_value_month",
+    "type": "integer",
+    "description": "前日までの観測史上1位の値の月"
+  },
+  {
+    "name": "max_value_day",
+    "type": "integer",
+    "description": "前日までの観測史上1位の値の日"
+  },
+  {
+    "name": "max_value_of_the_month",
+    "type": "float",
+    "description": "前日までの月の1位の値(mm)"
+  },
+  {
+    "name": "max_value_of_the_month_quality_info",
+    "type": "integer",
+    "description": "前日までの月の1位の値の品質情報"
+  },
+  {
+    "name": "max_value_of_the_month_year",
+    "type": "integer",
+    "description": "前日までの月の1位の値の年"
+  },
+  {
+    "name": "max_value_of_the_month_month",
+    "type": "integer",
+    "description": "前日までの月の1位の値の月"
+  },
+  {
+    "name": "max_value_of_the_month_day",
+    "type": "integer",
+    "description": "前日までの月の1位の値の日"
+  },
+  {
+    "name": "statistics_start_year",
+    "type": "integer",
+    "description": "統計開始年"
+  }
+]

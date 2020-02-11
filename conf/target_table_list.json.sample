@@ -1,0 +1,14 @@
+[
+  {
+    "dataset_id": "your_dataset_id",
+    "table_id": "daily_precipitation",
+    "source_uri": "https://www.data.jma.go.jp/obd/stats/data/mdrr/pre_rct/alltable/predaily00_rct.csv",
+    "schema_file_path": "./schema/daily_precipitation.json"
+  },
+  {
+    "dataset_id": "your_dataset_id",
+    "table_id": "daily_max_temperature",
+    "source_uri": "https://www.data.jma.go.jp/obd/stats/data/mdrr/tem_rct/alltable/mxtemsadext00_rct.csv",
+    "schema_file_path": "./schema/daily_max_temperature.json"
+  }
+]
