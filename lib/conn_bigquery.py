@@ -113,9 +113,23 @@ class ConnBigQuery():
         except NotFound:
             return False
 
+    def exists_dataset(self, dataset_id):
+        """
+        データセット存在確認
+        """
+        try:
+            self.client.get_dataset(dataset_id)
+            return True
+        except NotFound:
+            return False
 
-    def create_dataset(self):
+    def create_dataset(self, dataset_id):
         """
-        todo: 作る
+        データセット作成
         """
-        pass
+        try:
+            self.client.create_dataset(dataset_id)
+            logger.info('created dataset: '+ dataset_id)
+        except:
+            logger.error(traceback.format_exc())
+            sys.exit(1)

@@ -7,9 +7,6 @@ import traceback
 import lib.conn_bigquery
 from lib.download_uri import download_uri
 
-# todo: データセットがなければまず作る
-# todo: schemaファイルを書く（他の天気情報の）
-
 
 def _search_max_collected_date(project_id, dataset_id, table_id):
     """
@@ -120,13 +117,24 @@ if __name__ == '__main__':
             intermediate_csv_file_path = './data/' + target_table["table_id"] + '.csv'
             logger.info('etl target table_name is ' + target_table['table_id'])
 
-            # テーブル存在確認
-            query_bigquery = lib.conn_bigquery.ConnBigQuery(
+            # データセット存在確認
+            bigquery_client = lib.conn_bigquery.ConnBigQuery(
                 auth_key_path=service_account_json
             )
-            is_exists_table = query_bigquery.exists_table(
+            is_exists_dataset = bigquery_client.exists_dataset(
+                dataset_id=project_id + '.' + target_table['dataset_id']
+            )
+            logger.debug('dataset is already exists: ' + str(is_exists_dataset))
+
+            if not is_exists_dataset:
+                bigquery_client.create_dataset(target_table['dataset_id'])
+
+            # テーブル存在確認
+            is_exists_table = bigquery_client.exists_table(
                 table_id=project_id + '.' + target_table['dataset_id'] + '.' + target_table['table_id']
             )
+            logger.debug('table is already exists: ' + str(is_exists_dataset))
+
             if is_exists_table:
                 # いつまでロード済みかの日付を抽出
                 max_collected_date = _search_max_collected_date(
