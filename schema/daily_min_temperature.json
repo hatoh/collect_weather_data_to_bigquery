@@ -1,0 +1,187 @@
+[
+  {
+    "name":"observatory_number",
+    "type":"integer",
+    "description": "観測所番号"
+  },
+  {
+    "name":"prefectures",
+    "type":"string",
+    "description": "都道府県"
+  },
+  {
+    "name":"point",
+    "type":"string",
+    "description": "地点"
+  },
+  {
+    "name": "international_index_number",
+    "type": "integer",
+    "description": "国際地点番号"
+  },
+  {
+    "name": "observation_year",
+    "type": "integer",
+    "description": "現在時刻/観測時刻(年)"
+  },
+  {
+    "name": "observation_month",
+    "type": "integer",
+    "description": "現在時刻/観測時刻(月)"
+  },
+  {
+    "name": "observation_day",
+    "type": "integer",
+    "description": "現在時刻/観測時刻(日)"
+  },
+  {
+    "name": "observation_hour",
+    "type": "integer",
+    "description": "現在時刻/観測時刻(時)"
+  },
+  {
+    "name": "observation_minute",
+    "type": "integer",
+    "description": "現在時刻/観測時刻(分)"
+  },
+  {
+    "name": "value",
+    "type": "float",
+    "description": "当日の最低気温(℃)"
+  },
+  {
+    "name": "quality_info",
+    "type": "integer",
+    "description": "当日の最低気温の品質情報"
+  },
+  {
+    "name": "min_of_the_day_hour",
+    "type": "integer",
+    "description": "当日の最低気温起時（時）"
+  },
+  {
+    "name": "min_of_the_day_minitue",
+    "type": "integer",
+    "description": "当日の最低気温起時（分）"
+  },
+  {
+    "name": "min_of_the_day_quality_info",
+    "type": "integer",
+    "description": "当日の最低気温起時の品質情報"
+  },
+  {
+    "name": "difference_from_average_year",
+    "type": "float",
+    "description": "平年差（℃）"
+  },
+ {
+    "name": "difference_from_previous_day",
+    "type": "float",
+    "description": "前日差（℃）"
+  },
+  {
+    "name": "applicable_season_month",
+    "type": "integer",
+    "description": "該当旬（月）"
+  },
+  {
+    "name": "applicable_season",
+    "type": "integer",
+    "description": "該当旬（旬）"
+  },
+  {
+    "name": "extreme_value_update",
+    "type": "integer",
+    "description": "極値更新"
+  },
+  {
+    "name": "extreme_value_update_last_10_years",
+    "type": "integer",
+    "description": "10年未満での極値更新"
+  },
+  {
+    "name": "min_of_the_year",
+    "type": "integer",
+    "description": "今季最低"
+  },
+  {
+    "name": "min_value_of_the_year",
+    "type": "float",
+    "description": "今年の最低気温（℃)（前日まで）"
+  },
+  {
+    "name": "min_value_of_the_year_quality_info",
+    "type": "integer",
+    "description": "今年の最低気温（前日まで）の品質情報"
+  },
+  {
+    "name": "min_value_of_the_year_year",
+    "type": "integer",
+    "description": "今年の最低気温（前日まで）を観測した起日（年）"
+  },
+  {
+    "name": "min_value_of_the_year_month",
+    "type": "integer",
+    "description": "今年の最低気温（前日まで）を観測した起日（月）"
+  },
+  {
+    "name": "min_value_of_the_year_day",
+    "type": "integer",
+    "description": "今年の最低気温（前日まで）を観測した起日（日）"
+  },
+  {
+    "name": "min_value_until_now",
+    "type": "float",
+    "description": "前日までの観測史上1位の値（℃）"
+  },
+  {
+    "name": "min_value_quality_info",
+    "type": "integer",
+    "description": "前日までの観測史上1位の値の品質情報"
+  },
+  {
+    "name": "min_value_year",
+    "type": "integer",
+    "description": "前日までの観測史上1位の値を観測した起日（年）"
+  },
+  {
+    "name": "min_value_month",
+    "type": "integer",
+    "description": "前日までの観測史上1位の値を観測した起日（月）"
+  },
+  {
+    "name": "min_value_day",
+    "type": "integer",
+    "description": "前日までの観測史上1位の値を観測した起日（日）"
+  },
+  {
+    "name": "min_value_of_the_month",
+    "type": "float",
+    "description": "前日までの月の1位の値"
+  },
+  {
+    "name": "min_value_of_the_month_quality_info",
+    "type": "integer",
+    "description": "前日までの月の1位の値の品質情報"
+  },
+  {
+    "name": "min_value_of_the_month_year",
+    "type": "integer",
+    "description": "前日までの月の1位の値の起日（年）"
+  },
+  {
+    "name": "min_value_of_the_month_month",
+    "type": "integer",
+    "description": "前日までの月の1位の値の起日（月）"
+  },
+  {
+    "name": "min_value_of_the_month_day",
+    "type": "integer",
+    "description": "前日までの月の1位の値の起日（日）"
+  },
+  {
+    "name": "statistics_start_year",
+    "type": "integer",
+    "description": "統計開始年"
+  }
+]
